@@ -1,0 +1,177 @@
+/* register.css */
+/*
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 20vh;
+  }
+  
+  .row {
+    margin-bottom: 20px;
+  }
+  
+  .pull-right {
+    float: center;
+  }
+  
+  .alert {
+    margin-top: 20px;
+  }
+  
+  .table {
+    margin-top: 20px;
+  }
+  
+  .modal-dialog {
+    margin-top: 30px;
+  }
+  
+  .modal-content {
+    padding: 15px;
+  }
+  
+  .modal-footer {
+    justify-content: space-between;
+  }
+  
+  .modal-body input[type="text"],
+  .modal-body input[type="email"],
+  .modal-body input[type="password"],
+  .modal-body select,
+  .modal-body input[type="tel"] {
+    width: 30%;
+    padding: 5px;
+  }
+  
+  .modal-body input[type="radio"] {
+    margin-right: 5px;
+  }
+  
+  .modal-body .input-group label {
+    margin-bottom: 5px;
+  }
+  
+  .modal-body .input-group:last-child {
+    margin-bottom: 0;
+  }
+  
+  .modal-body .input-group button[type="submit"] {
+    margin-top: 10px;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+ /* background-image: url('https://www.fergusson.edu/upload/homeslideimage/48992_FergussonCollegePune_banner-main.jpg');*/
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  }
+  
+  /* Style the table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+  }
+  
+  /* Style table header */
+  th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Style table rows */
+  tr {
+    border: 1px solid #ddd;
+  }
+  
+  /* Style alternating rows for better readability (optional) */
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Style table cells */
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  
+  .btn {
+    display: block;
+    width: 100%;
+    padding-top: 10%;
+    padding: 6px 18px;
+    text-align: center;
+    border: none;
+    background: #847e7e;
+    outline: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    color: #FFF;
+    cursor: pointer;
+    transition: .3s;
+}
+.btn-modal{
+  color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    background: #847e7e;
+    border-radius: 30px;
+    margin-left: 10px 1;
+
+}
+.btn-modal:hover{
+  transform: translateY(-10px);
+  background: #000000;
+}
+.btn:hover {
+    transform: translateY(-10px);
+    background: #000000;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 4px;
+    padding: 2px;
+}
+
+nav {
+  background-color: #333;
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin-left: 90%;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  background: #847e7e;
+  border-radius: 30px;
+  margin-left: 10px 1;
+
+}
+nav a:hover {
+  background-color: #000000;
+
+}
+

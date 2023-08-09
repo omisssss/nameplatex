@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css') }}">
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <form action="{{url_for('login')}}" method="post">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </form>
+
+        <div class="row">
+            Logged In: <strong>{{ session.name }} | <a href="{{url_for('logout')}}">Logout</a></strong>
+        </div>
+
+        <div class="row">
+            <h2> Hello :) {{ users[0].name }}</h2>
+        </div>
+
+        <div class="user-details">
+            <!-- User details data here -->
+            
+            <div class="user-detail">
+                <div class="container">
+                    <div class="row">
+                        <div class="col md-12">
+                            <div class="user-details">
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>User ID:</strong></div>
+                                    <div class="value">{{ users[0].userid }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Name:</strong></div>
+                                    <div class="value">{{ users[0].name }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Email:</strong></div>
+                                    <div class="value">{{ users[0].email }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Phone Number:</strong></div>
+                                    <div class="value">{{ users[0].phone_number }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Department:</strong></div>
+                                    <div class="value">{{ users[0].department }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>User Type:</strong></div>
+                                    <div class="value">{{ users[0].user_type }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Vehicle Type:</strong></div>
+                                    <div class="value">{{ users[0].vehicle_type }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Vehicle Number:</strong></div>
+                                    <div class="value">{{ users[0].vehicle_number }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Total Amount:</strong></div>
+                                    <div class="value">{{ users[0].total_amt }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Date:</strong></div>
+                                    <div class="value">{{ users[0].date }}</div>
+                                </div>
+                                <div class="user-detail">
+                                    <div class="attribute"><strong>Status:</strong></div>
+                                    <div class="value">{{ users[0].status }}</div>
+                
+            </div>
+            <!-- Add other user details here -->
+
+        </div>
+
+        <div class="user-details">
+            <p>Your current balance: {{ users[0].total_amt }}</p>
+        
+            <!-- "Make Payment" button -->
+            <form action="{{ url_for('make_payment') }}" method="POST">
+                <label for="payment_amount">Enter Payment Amount:</label>
+                <input type="number" name="payment_amount" step="0.01" required>
+                <button type="submit">Make Payment</button>
+            </form>
+        
+            <!-- Other form elements and user-specific information can be added here -->
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

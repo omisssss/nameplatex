@@ -1,0 +1,320 @@
+{% include "header.html" %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index2.css') }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48
+    }
+    </style>
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <br>
+            <div class="row">
+                Logged In: <strong>{{session.name}}</strong> | <a href="{{url_for('logout')}}">Logout</a>
+            </div>
+            <br>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissable" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <h1 style="font-size: 1.75rem; font-weight: 700; text-align: center;">Admin Profile</h1>
+            <nav>
+               <!--- <h1>ADMIN PROFILE</h1>-->
+              <!--  <ul>
+                  <li>
+                    <button type="button" class="btn-modal" data-toggle="modal" data-target="#myModal" ><a href="{{url_for('logout')}}">Logout</a></button>
+                  </li>
+                     
+                  <li>-->
+                    
+<div class="container2">
+    <!-- Trigger the modal with a button -->
+    <ul>
+        <li>
+          <button type="button" class="btn-modal" data-toggle="modal" data-target="#myModal" ><a href="{{url_for('logout')}}">Logout</a></button>
+        </li>
+    <li>
+   
+    <button type="button" class="btn-modal" data-toggle="modal" data-target="#myModal">Insert</button>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Please Insert The Data</h4>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url_for('insert') }}" method="POST">
+            <div class="input-group">
+            
+                <input type="text" class="form-control" id="name" name="name" placeholder=" Enter your name" name="name">
+            </div>
+            <div class="input-group">
+            
+                <input type="email" class="form-control" id="email" name="email" placeholder=" Enter your MailId " name="email"></div>
+                
+            <div class="input-group">
+                
+                <input type="tel" class="form-control" id="phone_number" name="phone_number" placeholder=" Enter your phone number " name="phone_number"></div>
+                
+            <div class="input-group">
+                
+                <input type="password" class="form-control" id="password" name="password" placeholder=" Enter password " name="password"></div>
+            
+            <div class="input-group">
+                
+            <select name="department">
+                <option value="mcs.ca">MCS (CA)</option>
+                <option value="mcs.cs">MCS (CS)</option>
+                <option value="datascience">Data Science</option>
+                <option value="computer science">Computer Science</option>
+                <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="input-group">
+                
+                <select name="user_type">
+                    <option value="student">STUDENT</option>
+                    <option value="admin">ADMIN</option>
+                </select>
+                </div> 
+            <div class="input-group">
+                
+                <input type="text" class="form-control" id="vehicle_number" name="vehicle_number" placeholder=" Enter vehicle Number " name="vehicle_number"></div>
+            
+    
+            <div class="input-group">
+               
+                <select name="vehicle_type">
+                <option value="TwoWheeler" required> Two Wheeler </option>
+                <option  value="FourWheeler" required> Four Wheeler</option>
+                </select>
+                </div> 
+          </div>
+          <div class="input-group">
+            <button type="submit" class="btn">Register</button> 
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+                  </li>
+
+                </ul>
+            </nav>
+           
+            <table class="table table-striped">
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Password</th>
+                    <th>Department</th>
+                    <th>User Type</th>
+                    <th>Vehicle Type</th>
+                    <th>Vehicle Number</th>
+                    <th>Total Amount</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                {% for row in users %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                    <td>{{row[7]}}</td>
+                    <td>{{row[8]}}</td>
+                    <td>{{row[9]}}</td>
+                    <td>{{row[10]}}</td>
+                    <td>{{row[11]}}</td>
+                    <td>
+                        {% if row[11] == 'pending' %}
+                        <a href="{{ url_for('approve', userid=row[0]) }}">Approve</a>
+                        <a href="{{ url_for('reject', userid=row[0]) }}">Reject</a>
+                        {% endif %}
+                        <a href="/delete/{{row[0] }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a></button>
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modaledit{{row[0]}}">Edit</button>
+
+                    </td>
+                </tr>
+                
+                <div id="modeledit{{row[0]}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Update Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ url_for('update') }}" method="POST">
+                                    <div class="input-group">
+                                        <label>Name:</label>
+                                        <input type="hidden" name="userid" value="{{row[0]}}">
+                                        <input type="text" class="form-control" name="name" value="{{row[1]}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Email:</label>
+                                        <input type="text" class="form-control" name="email" value="{{row[2]}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Phone-NUMBER:</label>
+                                        <input type="text" class="form-control" name="phone_number" value="{{row[3]}}">
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                        <label>DEPARTMENT:</label>
+                                        <input type="text" class="form-control" name="department" value="{{row[5]}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>USER-TYPE:</label>
+                                        <input type="text" class="form-control" name="user_type" value="{{row[6]}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Vehicle_type:</label>
+                                        <input type="text" class="form-control" name="vehicle_type" value="{{row[7]}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>VEHICLE-NUMBER:</label>
+                                        <input type="text" class="form-control" name="vehicle_number" value="{{row[8]}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>TOTAL-AMOUNT:</label>
+                                        <input type="text" class="form-control" name="total_amt" value="{{row[9]}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>DATE:</label>
+                                        <input type="text" class="form-control" name="date" value="{{row[10]}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>status:</label>
+                                        <input type="text" class="form-control" name="status" value="{{row[11]}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Modal 
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Please Insert Data</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ url_for('insert') }}" method="POST">
+                            <div class="input-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name"
+                                    name="name">
+                            </div>
+                            <div class="input-group">
+                                <label for="mailid">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your MailId"
+                                    name="email">
+                            </div>
+                            <div class="input-group">
+                                <label for="phone_number">Phone_Number:</label>
+                                <input type="tel" class="form-control" id="phone_number" name="phone_number"
+                                    placeholder="Enter your phone number" name="phone_number">
+                            </div>
+                            <div class="input-group">
+                                <label for="pswd">Password:</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Enter password" name="password">
+                            </div>
+                            <div class="input-group">
+                                <label for="mailid">Email:</label>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter your MailId"
+                                    name="email">
+                            </div>
+                            <div class="input-group">
+                                <label for="department">Department:</label>
+                                <select name="department">
+                                    <option value="mcs.ca">MCS (CA)</option>
+                                    <option value="mcs.cs">MCS (CS)</option>
+                                    <option value="datascience">Data Science</option>
+                                    <option value="computer science">Computer Science</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="user_type">user_type:</label>
+                                <input type="radio" name="user_type" value="student" required> student
+                                <input type="radio" name="user_type" value="staff" required> staff
+                                <input type="radio" name="user_type" value="admin" required> admin
+                            </div>
+                            <div class="input-group">
+                                <label for="vehicle_number">vehicle_Number:</label>
+                                <input type="text" class="form-control" id="vehicle_number" name="vehicle_number"
+                                    placeholder="Enter vehicle Number" name="vehicle_number">
+                            </div>
+                            <div class="input-group">
+                                <label for="vehicle_type">Vehicle_type:</label>
+                                <input type="radio" name="vehicle_type" value="TwoWheeler" required> Two Wheeler
+                                <input type="radio" name="vehicle_type" value="FourWheeler" required> Four Wheeler
+                            </div>
+                            <div class="input-group">
+                                <button class="btn btn-primary" type="submit">Insert Data</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+{% endblock %}
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>-->
+{% include "footer.html" %}
